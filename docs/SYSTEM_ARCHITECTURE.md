@@ -2,27 +2,25 @@
 
 ## 1. 시스템 구조도 (System Architecture Diagram)
 
-```mermaid
 graph TD
-    User[Client (Browser)] -- HTTP/HTTPS --> LB[Load Balancer / Proxy]
-    LB --> WebApp[FastAPI Application Server]
+    User["Client (Browser)"] -->|HTTP/HTTPS| LB["Load Balancer / Proxy"]
+    LB --> WebApp["FastAPI Application Server"]
     
     subgraph "Application Layer"
-        WebApp --> Auth[Authentication Module]
-        WebApp --> Core[Core Logic (Assessment/Grading)]
-        WebApp --> PDF[PDF Generation Service]
-        WebApp --> AIService[AI Agent Service (LangChain)]
+        WebApp --> Auth["Authentication Module"]
+        WebApp --> Core["Core Logic (Assessment / Grading)"]
+        WebApp --> PDF["PDF Generation Service"]
+        WebApp --> AIService["AI Agent Service (LangChain)"]
     end
     
     subgraph "Data Layer"
-        Core -- ORM --> DB[(SQLite Database)]
-        AIService -- API Call --> OpenAI[OpenAI API (GPT-4o)]
+        Core -->|ORM| DB["SQLite Database"]
+        AIService -->|API Call| OpenAI["OpenAI API (GPT-4o)"]
     end
 
     subgraph "Output"
-        PDF -- Generate --> FileSystem[File System (Reports)]
+        PDF -->|Generate| FileSystem["File System (Reports)"]
     end
-```
 
 ## 2. 모듈별 상세 설명
 
@@ -56,3 +54,4 @@ graph TD
 4. **결과 생성(Result)**: LLM이 점수 및 피드백 JSON 반환.
 5. **피드백 저장(Persist)**: `Feedback` 테이블에 결과 저장.
 6. **조회(Retrieve)**: 교사가 대시보드에서 채점 결과 확인 및 검수.
+
