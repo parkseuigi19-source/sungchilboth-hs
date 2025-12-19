@@ -2,6 +2,7 @@
 
 ## 1. 시스템 구조도 (System Architecture Diagram)
 
+""
 graph TD
     User["Client (Browser)"] -->|HTTP/HTTPS| LB["Load Balancer / Proxy"]
     LB --> WebApp["FastAPI Application Server"]
@@ -21,6 +22,7 @@ graph TD
     subgraph "Output"
         PDF -->|Generate| FileSystem["File System (Reports)"]
     end
+    ""
 
 ## 2. 모듈별 상세 설명
 
@@ -54,4 +56,5 @@ graph TD
 4. **결과 생성(Result)**: LLM이 점수 및 피드백 JSON 반환.
 5. **피드백 저장(Persist)**: `Feedback` 테이블에 결과 저장.
 6. **조회(Retrieve)**: 교사가 대시보드에서 채점 결과 확인 및 검수.
+
 
