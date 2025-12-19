@@ -1,0 +1,23 @@
+fastapi
+uvicorn
+sqlalchemy
+python-dotenv
+openai
+langchain
+langchain-openai
+langgraph
+pydantic
+
+# 확장 기능 의존성
+reportlab
+matplotlib
+pandas
+numpy
+
+# DB & API Utils
+pymysql
+python-multipart
+jinja2
+pytest
+httpx
+pytest-asyncio

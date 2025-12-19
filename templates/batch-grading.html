@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일괄 채점 | 성취봇-HS</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/teacher" class="navbar-brand">👩‍🏫 성취봇-HS 교사</a>
+            <ul class="navbar-menu">
+                <li><a href="/teacher/dashboard" class="navbar-link">대시보드</a></li>
+                <li><a href="/teacher/class-report" class="navbar-link">학급 리포트</a></li>
+                <li><a href="/teacher/batch-grading" class="navbar-link active">일괄 채점</a></li>
+                <li><a href="#" class="navbar-link" onclick="Utils.logout()">로그아웃</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="container main-content">
+            <h1>✅ 일괄 채점</h1>
+            <p class="text-medium mb-lg">여러 학생의 답안을 한번에 채점합니다</p>
+
+            <!-- 채점 설정 -->
+            <div class="card card-purple mb-lg">
+                <div class="card-header">
+                    <h3 class="card-title">채점 설정</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">과목</label>
+                        <select id="subject" class="form-select">
+                            <option value="국어">국어</option>
+                            <option value="문법">문법</option>
+                            <option value="문학">문학</option>
+                            <option value="독서">독서</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">문제</label>
+                        <textarea id="question" class="form-textarea" rows="3" placeholder="채점할 문제를 입력하세요"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">모범 답안</label>
+                        <textarea id="modelAnswer" class="form-textarea" rows="3" placeholder="모범 답안을 입력하세요"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">만점</label>
+                        <input type="number" id="maxScore" class="form-input" value="100" min="1">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 학생 답안 입력 -->
+            <div class="card mb-lg">
+                <div class="card-header flex-between">
+                    <h3 class="card-title">학생 답안</h3>
+                    <button class="btn btn-ghost btn-sm" onclick="addStudentAnswer()">➕ 학생 추가</button>
+                </div>
+                <div class="card-body" id="studentAnswers">
+                    <div class="student-answer-item mb-md">
+                        <div class="grid grid-2 gap-md">
+                            <div class="form-group">
+                                <label class="form-label">학생 이름</label>
+                                <input type="text" class="form-input student-name" placeholder="예: 김철수">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">답안</label>
+                                <textarea class="form-textarea student-answer" rows="2" placeholder="학생 답안"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary btn-lg" onclick="batchGrade()" style="width: 100%;">
+                        🚀 일괄 채점 시작
+                    </button>
+                </div>
+            </div>
+
+            <!-- 채점 결과 -->
+            <div class="card" id="resultsCard" style="display: none;">
+                <div class="card-header flex-between">
+                    <h3 class="card-title">채점 결과</h3>
+                    <button class="btn btn-ghost btn-sm" onclick="exportResults()">📥 결과 내보내기</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>학생</th>
+                                    <th>점수</th>
+                                    <th>채점 근거</th>
+                                    <th>피드백</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsList"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/components.js"></script>
+    <script src="/static/js/batch-grading.js"></script>
+</body>
+
+</html>

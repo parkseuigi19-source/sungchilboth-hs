@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block title %}문제 풀이 - 성취봇-HS{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto space-y-8">
+    <!-- Header Section -->
+    <div class="flex items-center justify-between animate-fade-in-down">
+        <div>
+            <h1
+                class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600">
+                서술형 평가</h1>
+            <p class="mt-1 text-gray-500">정확한 이해와 논리적인 서술로 성취기준을 달성해보세요.</p>
+        </div>
+        <span
+            class="px-4 py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 text-indigo-700 border border-indigo-100 rounded-full text-sm font-semibold shadow-sm">
+            국어 / 문학
+        </span>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left: Question Card -->
+        <div class="lg:col-span-2 space-y-6">
+            <div
+                class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden group hover:shadow-xl transition-shadow duration-300">
+                <div
+                    class="bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+                    <span class="font-bold text-gray-800 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                            </path>
+                        </svg>
+                        문제 1
+                    </span>
+                    <span class="text-xs font-medium text-gray-400">배점 10점</span>
+                </div>
+                <div class="p-8">
+                    <div class="prose prose-indigo max-w-none text-gray-800">
+                        <p class="text-xl font-medium leading-relaxed mb-6">
+                            다음은 김소월의 시 '진달래꽃'의 일부이다. <br>
+                            이 시에 나타난 화자의 태도를 <span class="bg-yellow-100 px-1 rounded">'이별의 정한'</span>과 관련지어 200자 내외로
+                            서술하시오.
+                        </p>
+                        <div
+                            class="relative p-6 bg-gray-50 rounded-xl text-gray-700 leading-loose border-l-4 border-indigo-400 shadow-inner">
+                            <div class="absolute top-4 left-4 text-4xl text-indigo-200 opacity-50">"</div>
+                            <div class="pl-6 italic font-serif text-lg">
+                                나 보기가 역겨워<br>
+                                가실 때에는<br>
+                                말없이 고이 보내 드리우리다.<br>
+                                영변에 약산<br>
+                                진달래꽃<br>
+                                아름 따다 가실 길에 뿌리우리다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Answer Form -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 relative">
+                <form id="submissionForm" class="space-y-4">
+                    <div>
+                        <label for="answer"
+                            class="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                </path>
+                            </svg>
+                            나의 답안
+                        </label>
+                        <div class="relative">
+                            <textarea id="answer" name="answer" rows="8"
+                                class="w-full rounded-xl border-gray-200 bg-gray-50 focus:bg-white shadow-inner focus:border-indigo-500 focus:ring-indigo-500 resize-none p-5 text-base leading-relaxed transition-all duration-200 placeholder-gray-400"
+                                placeholder="논리적으로 답안을 서술해보세요..."></textarea>
+                            <div class="absolute bottom-3 right-3 text-xs text-gray-400">0 / 200자</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-4">
+                        <button type="button"
+                            class="group flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors px-3 py-2 rounded-lg hover:bg-indigo-50">
+                            <svg class="w-5 h-5 transition-transform group-hover:scale-110" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <span class="text-sm font-medium">사진 답안 업로드</span>
+                        </button>
+
+                        <button type="submit"
+                            class="px-8 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 flex items-center gap-2">
+                            <span>제출 및 AI 분석</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right: AI Evaluation & Guide -->
+        <div class="lg:col-span-1 space-y-6">
+            <!-- Guidance Card -->
+            <div class="bg-blue-50 rounded-2xl p-6 border border-blue-100 shadow-sm">
+                <h3 class="font-bold text-blue-900 mb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+                        </path>
+                    </svg>
+                    학습 가이드
+                </h3>
+                <ul class="space-y-2 text-sm text-blue-800">
+                    <li class="flex items-start gap-2">
+                        <span class="mt-1 w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0"></span>
+                        <span>화자의 상황을 먼저 파악해보세요.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="mt-1 w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0"></span>
+                        <span>'반어법'이 사용된 부분을 찾아보세요.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="mt-1 w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0"></span>
+                        <span>자신의 감정을 절제하는 표현에 주목하세요.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Result Section (Initially Hidden) -->
+            <div id="resultSection" class="hidden animate-fade-in-up">
+                <div
+                    class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden ring-1 ring-emerald-100">
+                    <div class="bg-emerald-50 px-6 py-4 border-b border-emerald-100 flex items-center justify-between">
+                        <h3 class="font-bold text-emerald-900 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            AI 분석 리포트
+                        </h3>
+                        <span
+                            class="bg-white text-emerald-600 text-xs px-2 py-1 rounded border border-emerald-200 font-mono">BETA</span>
+                    </div>
+                    <div class="p-6">
+                        <div id="feedbackContent" class="text-gray-700 whitespace-pre-wrap text-sm leading-relaxed">
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <button
+                                class="w-full py-2 bg-gray-50 hover:bg-gray-100 text-gray-600 text-sm font-medium rounded-lg transition-colors">
+                                오답 노트에 저장
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('submissionForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const answer = document.getElementById('answer').value;
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalBtnContent = btn.innerHTML;
+
+        // Loading State
+        btn.disabled = true;
+        btn.innerHTML = `<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> 분석 중...`;
+
+        try {
+            const response = await fetch('/api/student/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: '학생1', // Mock
+                    question_id: 1,
+                    answer_text: answer
+                })
+            });
+            const data = await response.json();
+
+            // Show Feedback with animation
+            const resultSection = document.getElementById('resultSection');
+            resultSection.classList.remove('hidden');
+            document.getElementById('feedbackContent').textContent = data.feedback || "피드백을 불러올 수 없습니다.";
+
+            // Scroll to result
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        } catch (err) {
+            alert('제출 중 오류가 발생했습니다.');
+            console.error(err);
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = originalBtnContent;
+        }
+    });
+</script>
+{% endblock %}

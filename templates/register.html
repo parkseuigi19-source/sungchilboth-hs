@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>성취봇-HS 회원가입</title>
+  <style>
+    :root {
+      --main-pink: #ff8fc8;
+      --main-purple: #8c82ff;
+      --bg-gradient: linear-gradient(135deg, #ffedf9 0%, #f1e4ff 100%);
+      --card-bg: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg-gradient);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+
+    .register-container {
+      display: flex;
+      width: 900px;
+      max-width: 95%;
+      background: var(--card-bg);
+      border-radius: 25px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    /* 왼쪽 */
+    .register-left {
+      flex: 1.1;
+      background: linear-gradient(135deg, #fff6fa, #f2f0ff);
+      padding: 60px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .register-left h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #5f56ff, #ff59a8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .register-left p {
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .robot {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(145deg, #f2e7ff, #ffeaf5);
+      border-radius: 25px;
+      padding: 25px;
+      box-shadow: inset 0 0 15px rgba(255,255,255,0.6);
+    }
+
+    .robot img {
+      width: 85%;
+      max-width: 280px;
+      height: auto;
+    }
+
+    /* 오른쪽 */
+    .register-right {
+      flex: 0.9;
+      padding: 60px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .register-right h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+      transition: border 0.3s;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--main-purple);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(150, 140, 255, 0.2);
+    }
+
+    .btn {
+      width: 100%;
+      background: linear-gradient(90deg, #7b73ff, #ff6fb2);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 5px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .login-link {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 15px;
+    }
+
+    .login-link a {
+      color: var(--main-purple);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 850px) {
+      .register-container {
+        flex-direction: column;
+      }
+      .register-left, .register-right {
+        width: 100%;
+        padding: 40px 25px;
+      }
+      .robot img {
+        max-width: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="register-container">
+    <div class="register-left">
+      <h1>AI와 함께하는 국어 학습<br>피드백 플랫폼</h1>
+      <p>“성취봇-HS”는 고교학점제·최소성취보장지도에 맞춘 국어 교육 플랫폼입니다.  
+      서술형 분석과 리포트를 연결하여 AI가 학습 성취를 함께 돕습니다.</p>
+      <div class="robot">
+        <img src="/static/images/robot_tutor.png" alt="AI 로봇 교사 캐릭터">
+      </div>
+    </div>
+
+    <div class="register-right">
+       <div class="logo"><i>🎓</i> 성취봇-HS</div>
+      <h2>회원가입</h2>
+      <form id="registerForm">
+        <label for="username">이름</label>
+        <input type="text" id="username" placeholder="예) 홍길동" required />
+
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" placeholder="비밀번호 입력" required />
+
+        <label for="role">역할</label>
+        <select id="role" required>
+          <option value="student">학생</option>
+          <option value="teacher">교사</option>
+        </select>
+
+        <button type="submit" class="btn">가입하기 💫</button>
+      </form>
+
+      <div class="login-link">
+        이미 계정이 있나요? <a href="/login">로그인</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API = "/api/auth/register";
+
+    document.getElementById("registerForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const role = document.getElementById("role").value;
+
+      try {
+        const res = await fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password, role }),
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          alert("회원가입 완료! 🎉 로그인 페이지로 이동합니다.");
+          location.href = "/login";
+        } else {
+          alert(data.msg || "회원가입 실패");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("서버 오류가 발생했습니다.");
+      }
+    });
+  </script>
+</body>
+</html>

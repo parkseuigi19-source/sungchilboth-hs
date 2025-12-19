@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성취도 대시보드 | 성취봇-HS</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .stat-card {
+            background: var(--bg-gradient);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: var(--font-2xl);
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            color: var(--text-medium);
+            margin-top: var(--spacing-sm);
+        }
+
+        .weakness-item {
+            background: #fff3e0;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-sm);
+            border-left: 4px solid var(--warning);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .strength-item {
+            background: #e8f5e9;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-sm);
+            border-left: 4px solid var(--success);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            border-left: 2px solid var(--border-light);
+            position: relative;
+            margin-left: var(--spacing-md);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 20px;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-purple);
+            border-radius: 50%;
+        }
+
+        .timeline-time {
+            color: var(--text-light);
+            font-size: var(--font-sm);
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 네비게이션 -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/student" class="navbar-brand">🎓 성취봇-HS</a>
+            <ul class="navbar-menu">
+                <li><a href="/student" class="navbar-link">채팅</a></li>
+                <li><a href="/student/dashboard" class="navbar-link active">대시보드</a></li>
+                <li><a href="/student/grading" class="navbar-link">답안 제출</a></li>
+                <li><a href="/student/portfolio" class="navbar-link">포트폴리오</a></li>
+                <li><a href="#" class="navbar-link" onclick="Utils.logout()">로그아웃</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="container main-content">
+            <h1>📊 나의 성취도 대시보드</h1>
+            <p class="text-medium mb-lg">학습 진행 상황과 성취도를 한눈에 확인하세요</p>
+
+            <!-- 통계 카드 -->
+            <div class="grid grid-4 mb-lg">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalScore">0%</div>
+                    <div class="stat-label">전체 성취도</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalQuestions">0</div>
+                    <div class="stat-label">풀이한 문제</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avgScore">0점</div>
+                    <div class="stat-label">평균 점수</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="studyDays">0일</div>
+                    <div class="stat-label">학습 일수</div>
+                </div>
+            </div>
+
+            <!-- 메인 그리드 -->
+            <div class="dashboard-grid">
+                <!-- 왼쪽: 차트 영역 -->
+                <div>
+                    <!-- 과목별 성취도 -->
+                    <div class="card card-purple mb-lg">
+                        <div class="card-header">
+                            <h3 class="card-title">📚 과목별 성취도</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="subjectChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 성취도 추이 -->
+                    <div class="card card-blue">
+                        <div class="card-header">
+                            <h3 class="card-title">📈 성취도 추이</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="trendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 오른쪽: 분석 영역 -->
+                <div>
+                    <!-- 강점 분석 -->
+                    <div class="card card-pink mb-lg">
+                        <div class="card-header">
+                            <h3 class="card-title">💪 강점 영역</h3>
+                        </div>
+                        <div class="card-body" id="strengthList">
+                            <p class="text-center text-medium">데이터를 불러오는 중...</p>
+                        </div>
+                    </div>
+
+                    <!-- 약점 분석 -->
+                    <div class="card mb-lg">
+                        <div class="card-header">
+                            <h3 class="card-title">🎯 개선 필요 영역</h3>
+                        </div>
+                        <div class="card-body" id="weaknessList">
+                            <p class="text-center text-medium">데이터를 불러오는 중...</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 최근 활동 -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">⏱️ 최근 학습 활동</h3>
+            </div>
+            <div class="card-body">
+                <div id="activityTimeline">
+                    <p class="text-center text-medium">데이터를 불러오는 중...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="/static/js/components.js"></script>
+    <script src="/static/js/dashboard.js?v=1.0.1"></script>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-포트폴리오 | 성취봇-HS</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        .portfolio-header {
+            background: var(--bg-gradient);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .portfolio-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .stat-box {
+            background: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+
+        .chart-wrapper {
+            height: 300px;
+            margin: var(--spacing-lg) 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/student" class="navbar-brand">🎓 성취봇-HS</a>
+            <ul class="navbar-menu">
+                <li><a href="/student" class="navbar-link">채팅</a></li>
+                <li><a href="/student/dashboard" class="navbar-link">대시보드</a></li>
+                <li><a href="/student/grading" class="navbar-link">답안 제출</a></li>
+                <li><a href="/student/portfolio" class="navbar-link active">포트폴리오</a></li>
+                <li><a href="#" class="navbar-link" onclick="Utils.logout()">로그아웃</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="container main-content">
+            <div class="portfolio-header">
+                <h1>📁 나의 E-포트폴리오</h1>
+                <p class="text-medium">학습 여정을 한눈에 확인하세요</p>
+                <div class="portfolio-stats">
+                    <div class="stat-box">
+                        <div class="text-2xl text-bold text-primary" id="totalQuestions">0</div>
+                        <div class="text-sm text-medium">총 문제 수</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="text-2xl text-bold text-primary" id="avgScore">0</div>
+                        <div class="text-sm text-medium">평균 점수</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="text-2xl text-bold text-primary" id="totalScore">0</div>
+                        <div class="text-sm text-medium">총점</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-2 gap-lg mb-lg">
+                <div class="card card-purple">
+                    <div class="card-header">
+                        <h3 class="card-title">📈 성취도 추이</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-wrapper">
+                            <canvas id="progressChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-blue">
+                    <div class="card-header">
+                        <h3 class="card-title">🎯 영역별 성취도</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-wrapper">
+                            <canvas id="areaChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-2 gap-lg mb-lg">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">💪 강점 영역</h3>
+                    </div>
+                    <div class="card-body" id="strongAreas">
+                        <p class="text-center text-medium">데이터를 불러오는 중...</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">🎯 약점 영역</h3>
+                    </div>
+                    <div class="card-body" id="weakAreas">
+                        <p class="text-center text-medium">데이터를 불러오는 중...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header flex-between">
+                    <h3 class="card-title">📚 주요 학습 기록</h3>
+                    <button class="btn btn-primary" onclick="generatePDF()">
+                        📄 PDF 다운로드
+                    </button>
+                </div>
+                <div class="card-body" id="learningRecords">
+                    <p class="text-center text-medium">데이터를 불러오는 중...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/components.js"></script>
+    <script src="/static/js/portfolio.js"></script>
+</body>
+
+</html>

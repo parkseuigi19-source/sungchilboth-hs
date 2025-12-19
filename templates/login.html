@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>성취봇-HS 로그인</title>
+  <style>
+    :root {
+      --main-pink: #ff8fc8;
+      --main-purple: #8c82ff;
+      --bg-gradient: linear-gradient(135deg, #ffedf9 0%, #f1e4ff 100%);
+      --card-bg: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg-gradient);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-attachment: fixed;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .login-container {
+      display: flex;
+      width: 900px;
+      max-width: 95%;
+      background: var(--card-bg);
+      border-radius: 25px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    /* 왼쪽 영역 */
+    .login-left {
+      flex: 1.1;
+      background: linear-gradient(135deg, #fff6fa, #f2f0ff);
+      padding: 60px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .login-left h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #5f56ff, #ff59a8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .login-left p {
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .robot {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(145deg, #f2e7ff, #ffeaf5);
+      border-radius: 25px;
+      padding: 25px;
+      box-shadow: inset 0 0 15px rgba(255,255,255,0.6);
+    }
+
+    .robot img {
+      width: 85%;
+      max-width: 280px;
+      height: auto;
+    }
+
+    /* 오른쪽 로그인 카드 */
+    .login-right {
+      flex: 0.9;
+      padding: 60px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .login-right h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+      transition: border 0.3s;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--main-purple);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(150, 140, 255, 0.2);
+    }
+
+    .btn {
+      width: 100%;
+      background: linear-gradient(90deg, #7b73ff, #ff6fb2);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 5px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    /* 회원가입 문구 */
+    .register-link {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 15px;
+    }
+
+    .register-link a {
+      color: var(--main-purple);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #777;
+      margin-top: 10px;
+    }
+
+    .login-footer a {
+      color: var(--main-purple);
+      text-decoration: none;
+    }
+
+    @media (max-width: 850px) {
+      .login-container {
+        flex-direction: column;
+      }
+      .login-left, .login-right {
+        width: 100%;
+        padding: 40px 25px;
+      }
+      .robot img {
+        max-width: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+    <div class="login-left">
+      <h1>AI와 함께하는 국어 학습<br>피드백 플랫폼</h1>
+      <p>“성취봇-HS”는 고교학점제·최소성취보장지도에 맞춰 질문·서술형 분석·리포트를 한 곳에서 연결해요.  
+      로그인하면 AI가 성취기준과 대화하듯 학습을 돕습니다.</p>
+      <div class="robot">
+        <img src="/static/images/robot_tutor.png" alt="AI 로봇 교사 캐릭터">
+      </div>
+    </div>
+
+    <div class="login-right">
+       <div class="logo"><i>🎓</i> 성취봇-HS</div>
+      <h2>로그인하고 시작하기</h2>
+      <form id="loginForm">
+        <label for="username">이름</label>
+        <input type="text" id="username" placeholder="예) 홍길동" required>
+
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" placeholder="비밀번호 입력" required>
+
+        <label for="role">역할</label>
+        <select id="role" required>
+          <option value="student" selected>학생</option>
+          <option value="teacher">교사</option>
+        </select>
+
+        <button type="submit" class="btn">시작하기 🚀</button>
+      </form>
+
+      <!-- ✅ 회원가입 링크 복원 -->
+      <div class="register-link">
+        아직 계정이 없나요? <a href="/register">회원가입</a>
+      </div>
+
+      <div class="login-footer">
+        문제가 있나요? <a href="mailto:help@sungchibot.local">help@sungchibot.local</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API = "/api/auth/login";
+
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const role = document.getElementById("role").value;
+
+      try {
+        const res = await fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password, role }),
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          localStorage.setItem("user", username);
+          localStorage.setItem("role", role);
+          alert("로그인 성공! 🎉");
+          location.href = role === "teacher" ? "/teacher" : "/student";
+        } else {
+          alert(data.msg || "로그인 실패");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("서버 오류가 발생했습니다.");
+      }
+    });
+  </script>
+</body>
+</html>

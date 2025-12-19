@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+
+{% block title %}교사 대시보드 - 성취봇-HS{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+    <!-- Welcome Header -->
+    <div class="flex items-center justify-between pb-6 border-b border-gray-100">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900">안녕하세요, 김철수 선생님 👋</h1>
+            <p class="mt-1 text-gray-500">오늘의 학급 성취도 현황을 확인하세요.</p>
+        </div>
+        <div class="flex items-center gap-3">
+            <span class="text-sm text-gray-500">마지막 업데이트: 10:25 AM</span>
+            <button
+                class="px-4 py-2 bg-white border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 text-sm font-medium shadow-sm transition-colors">
+                새로고침
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Stat Card 1 -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                        </path>
+                    </svg>
+                </div>
+                <span class="text-sm font-medium text-green-600 bg-green-50 px-2.5 py-0.5 rounded-full">+2.5%</span>
+            </div>
+            <h3 class="text-gray-500 text-sm font-medium">전체 학생 수</h3>
+            <p class="text-2xl font-bold text-gray-900 mt-1">32명</p>
+        </div>
+
+        <!-- Stat Card 2 -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <span class="text-sm font-medium text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded-full">85% 완료</span>
+            </div>
+            <h3 class="text-gray-500 text-sm font-medium">오늘의 과제 제출</h3>
+            <p class="text-2xl font-bold text-gray-900 mt-1">27/32</p>
+        </div>
+
+        <!-- Stat Card 3 -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <div class="p-3 bg-red-50 text-red-600 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                        </path>
+                    </svg>
+                </div>
+                <span class="text-sm font-medium text-red-600 bg-red-50 px-2.5 py-0.5 rounded-full">관심 필요</span>
+            </div>
+            <h3 class="text-gray-500 text-sm font-medium">학습 부진 예상</h3>
+            <p class="text-2xl font-bold text-gray-900 mt-1">3명</p>
+        </div>
+
+        <!-- Stat Card 4 -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                        </path>
+                    </svg>
+                </div>
+                <span class="text-sm font-medium text-gray-500">평균</span>
+            </div>
+            <h3 class="text-gray-500 text-sm font-medium">학급 성취도 평균</h3>
+            <p class="text-2xl font-bold text-gray-900 mt-1">78.5점</p>
+        </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left Column: Charts & Analysis -->
+        <div class="lg:col-span-2 space-y-8">
+            <!-- Main Chart Card -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg font-bold text-gray-900">학급 성취도 추이</h2>
+                    <select
+                        class="text-sm border-gray-200 rounded-lg text-gray-500 focus:border-brand focus:ring-brand">
+                        <option>최근 1개월</option>
+                        <option>최근 3개월</option>
+                        <option>이번 학기</option>
+                    </select>
+                </div>
+                <!-- Chart Placeholder -->
+                <div
+                    class="h-64 bg-gray-50 rounded-xl flex items-center justify-center border border-dashed border-gray-200">
+                    <div class="text-center text-gray-400">
+                        <svg class="w-12 h-12 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z">
+                            </path>
+                        </svg>
+                        <span>성취도 그래프 영역</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Submissions Table -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+                    <h2 class="text-lg font-bold text-gray-900">최근 제출 답안</h2>
+                    <a href="#" class="text-sm text-brand hover:text-brand-dark font-medium">전체보기 &rarr;</a>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-500 uppercase text-xs">
+                            <tr>
+                                <th class="px-6 py-3 font-medium">학생</th>
+                                <th class="px-6 py-3 font-medium">과제명</th>
+                                <th class="px-6 py-3 font-medium">제출 시간</th>
+                                <th class="px-6 py-3 font-medium">AI 평가</th>
+                                <th class="px-6 py-3 font-medium">상태</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            {% for i in range(5) %}
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 font-medium text-gray-900">이학생</td>
+                                <td class="px-6 py-4 text-gray-600">국어-1. 진달래꽃 감상</td>
+                                <td class="px-6 py-4 text-gray-500">10분 전</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        우수 (A)
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button class="text-gray-400 hover:text-brand transition-colors">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Notifications & Quick Actions -->
+        <div class="lg:col-span-1 space-y-8">
+            <!-- Notifications -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h2 class="text-lg font-bold text-gray-900 mb-4">알림 센터</h2>
+                <div class="space-y-4">
+                    <div class="flex gap-4 items-start p-3 bg-red-50 rounded-lg border border-red-100">
+                        <div class="mt-1 text-red-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm font-semibold text-gray-900">학습 부진 알림</p>
+                            <p class="text-xs text-gray-600 mt-1">박민수 학생이 3회 연속 과제를 미제출했습니다.</p>
+                            <button class="mt-2 text-xs font-medium text-red-600 hover:text-red-700">상담 관리하기
+                                &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="bg-gradient-to-br from-indigo-600 to-blue-700 p-6 rounded-2xl shadow-lg text-white">
+                <h2 class="text-lg font-bold mb-4">빠른 작업</h2>
+                <div class="space-y-3">
+                    <button
+                        class="w-full py-3 px-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-left flex items-center gap-3 transition-colors backdrop-blur-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        <span class="font-medium">새 과제 만들기</span>
+                    </button>
+                    <button
+                        class="w-full py-3 px-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-left flex items-center gap-3 transition-colors backdrop-blur-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+                            </path>
+                        </svg>
+                        <span class="font-medium">모의고사 생성</span>
+                    </button>
+                    <button
+                        class="w-full py-3 px-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-left flex items-center gap-3 transition-colors backdrop-blur-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
+                        </svg>
+                        <span class="font-medium">학급 관리</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

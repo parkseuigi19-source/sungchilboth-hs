@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서술형 답안 제출 | 성취봇-HS</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .grading-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .char-counter {
+            text-align: right;
+            color: var(--text-light);
+            font-size: var(--font-sm);
+            margin-top: var(--spacing-xs);
+        }
+
+        .history-item {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .history-item:hover {
+            border-color: var(--primary-purple);
+            box-shadow: var(--shadow-sm);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 네비게이션 -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/student" class="navbar-brand">🎓 성취봇-HS</a>
+            <ul class="navbar-menu">
+                <li><a href="/student" class="navbar-link">채팅</a></li>
+                <li><a href="/student/dashboard" class="navbar-link">대시보드</a></li>
+                <li><a href="/student/grading" class="navbar-link active">답안 제출</a></li>
+                <li><a href="/student/portfolio" class="navbar-link">포트폴리오</a></li>
+                <li><a href="#" class="navbar-link" onclick="Utils.logout()">로그아웃</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="container main-content grading-container">
+            <h1>✍️ 서술형 답안 제출</h1>
+            <p class="text-medium mb-lg">AI가 답안을 채점하고 상세한 피드백을 제공합니다</p>
+
+            <!-- 답안 제출 폼 -->
+            <div class="card card-purple mb-lg">
+                <div class="card-header">
+                    <h3 class="card-title">📝 답안 작성</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">과목</label>
+                        <select id="subjectInput" class="form-select">
+                            <option value="국어">국어</option>
+                            <option value="문법">문법</option>
+                            <option value="문학">문학</option>
+                            <option value="독서">독서</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">문제</label>
+                        <textarea id="questionInput" class="form-textarea" placeholder="문제를 입력하세요..."
+                            rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">모범 답안 (선택사항)</label>
+                        <textarea id="modelAnswerInput" class="form-textarea" placeholder="모범 답안이 있다면 입력하세요..."
+                            rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">나의 답안</label>
+                        <textarea id="studentAnswerInput" class="form-textarea" placeholder="답안을 작성하세요..." rows="6"
+                            oninput="updateCharCount()"></textarea>
+                        <div class="char-counter" id="charCounter">0자</div>
+                    </div>
+
+                    <button class="btn btn-primary btn-lg" onclick="submitGrading()" style="width: 100%;">
+                        🚀 채점 받기
+                    </button>
+                </div>
+            </div>
+
+            <!-- 채점 이력 -->
+            <div class="card">
+                <div class="card-header flex-between">
+                    <h3 class="card-title">📚 채점 이력</h3>
+                    <button class="btn btn-ghost btn-sm" onclick="loadHistory()">
+                        🔄 새로고침
+                    </button>
+                </div>
+                <div class="card-body" id="historyList">
+                    <p class="text-center text-medium">데이터를 불러오는 중...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/components.js"></script>
+    <script src="/static/js/grading.js"></script>
+</body>
+
+</html>
