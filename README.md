@@ -1,65 +1,99 @@
-# 성취봇-HS (SungchiBot-HS) 🎓
+# 성취봇-HS (Seongchibot-HS)
 
-> **2022 개정 교육과정 기반 고교학점제 지원 AI 밀착 학습 및 평가 시스템**
+**2022 개정 교육과정 반영 맞춤형 학습 지원 시스템**
 
-성취봇-HS는 고등학교 교사의 업무를 경감하고, 학생들에게는 개별화된 맞춤형 피드백을 제공하기 위해 개발된 **AI 하이브리드 학습 지원 플랫폼**입니다. 생성형 AI(GPT-4o)를 활용하여 서/논술형 문항 자동 채점, 개인별 성취 분석 리포트 생성, 1:1 학습 튜터링을 제공합니다.
+성취봇-HS는 학생들의 성취 기준 달성을 돕고, 교사들에게는 효율적인 학습 관리 및 평가 도구를 제공하는 AI 기반 학습 지원 플랫폼입니다.
 
-## 📂 프로젝트 문서 (Project Documentation)
+## 🌟 주요 기능
 
-이 프로젝트의 상세한 기획 및 기술 명세는 아래 문서들을 참고해 주세요.
+### 👨‍🎓 학생용
+- **AI 튜터 채팅**: LangChain & OpenAI GPT-4o 기반의 실시간 학습 질의응답
+- **성취도 대시보드**: 개인별 학습 현황 및 성취율 시각화
+- **E-포트폴리오**: 학습 이력 및 결과물 자동 정리
+- **셀프 채점**: 서술형/논술형 답안에 대한 AI 자동 채점 및 피드백
 
-- **[📌 프로젝트 정의서 (Project Definition)](docs/PROJECT_DEFINITION.md)**
-  - 기획 배경, 개발 목적, 해결하고자 하는 문제, 기대 효과 등 프로젝트의 전반적인 개요를 다룹니다.
+### 👩‍🏫 교사용
+- **학급 리포트**: 반 전체의 학습 현황 및 성취도 분석 보고서
+- **일괄 채점**: 학생 답안 일괄 처리 및 분석
+- **AI 보조 도구**: 수업 자료 생성 및 평가 기준 관리 지원
 
-- **[✅ MVP 기능 정의서 (Feature Specs)](docs/MVP_FEATURES.md)**
-  - 학생, 교사, 관리자별 핵심 기능 명세와 필수 개발 요구사항을 정의합니다.
+## 🛠 기술 스택 (Tech Stack)
 
-- **[🛠 기술 스택 정의서 (Tech Stack)](docs/TECH_STACK.md)**
-  - Backend(FastAPI), Frontend(Modern Web), AI(LangChain), DB 등 사용된 기술과 선정 이유를 설명합니다.
+### Backend
+- **Python 3.9+**
+- **FastAPI**: 고성능 비동기 웹 프레임워크
+- **SQLAlchemy**: ORM 및 데이터베이스 관리
+- **Pydantic**: 데이터 검증
 
-- **[🏗 시스템 아키텍처 (Architecture)](docs/SYSTEM_ARCHITECTURE.md)**
-  - 시스템 구성도, 데이터 흐름, 모듈별 역할 등 기술적인 설계 내용을 포함합니다.
+### AI & LLM
+- **LangChain**: LLM 어플리케이션 개발 프레임워크
+- **OpenAI API (GPT-4o)**: 교육용 챗봇 및 평가 엔진
+- **LangGraph**: 에이전트 워크플로우 관리
 
----
+### Frontend
+- **Jinja2 Templates**: 서버 사이드 렌더링
+- **Vanilla JS / CSS**: 사용자 인터페이스 구현
+- **Matplotlib**: 데이터 시각화 및 리포트 그래프 생성
 
-## 🚀 시작하기 (Quick Start)
+### Infrastructure & Tools
+- **Docker & Docker Compose**: 컨테이너 기반 배포
+- **SQLite / MySQL**: 데이터베이스 (환경에 따라 구성)
 
-### 필수 요구사항
-- Python 3.12+
+## 📂 디렉토리 구조
+
+```
+sungchilboth-hs-main/
+├── ai/                  # AI 핵심 로직 (분석기, 채점기, 에이전트 등)
+├── api/                 # FastAPI 라우터 (기능별 API 분리)
+├── docs/                # 문서 관련 파일
+├── report/              # 리포트 생성 결과물 저장
+├── static/              # 정적 파일 (CSS, JS, 이미지)
+├── templates/           # HTML 템플릿 (Jinja2)
+├── tests/               # 단위 테스트 및 테스트 데이터
+├── utils/               # 유틸리티 함수
+├── main.py              # 메인 애플리케이션 진입점
+├── models.py            # 데이터베이스 모델 정의
+├── database.py          # DB 연결 설정
+├── seed_db.py           # 초기 데이터 적재 스크립트
+├── requirements.txt     # 의존성 패키지 목록
+└── docker-compose.yml   # Docker 실행 설정
+```
+
+## 🚀 시작하기 (Getting Started)
+
+### 사전 요구 사항 (Prerequisites)
+- Python 3.9 이상
+- Docker & Docker Compose (선택 사항)
 - OpenAI API Key
 
-### 설치 및 실행
+### 1. 환경 설정 (.env)
+프로젝트 루트 디렉토리에 `.env` 파일을 생성하고 다음 내용을 작성하세요.
 
-1. **저장소 클론**
-   ```bash
-   git clone https://github.com/your-repo/sungchibot-hs.git
-   cd sungchibot-hs
-   ```
+```env
+OPENAI_API_KEY=sk-your-api-key-here
+DB_URL=sqlite:///./sungchibot.db
+```
 
-2. **가상환경 설정**
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # Windows: .venv\Scripts\activate
-   ```
+### 2. 로컬 실행 (Local Execution)
 
-3. **패키지 설치**
-   ```bash
-   pip install -r requirements.txt
-   ```
+패키지 설치:
+```bash
+pip install -r requirements.txt
+```
 
-4. **환경 변수 설정**
-   `.env.example` 파일을 복사하여 `.env` 생성 후 API Key 입력
-   ```bash
-   cp .env.example .env
-   ```
+서버 실행:
+```bash
+python main.py
+# 또는
+uvicorn main:app --reload
+```
 
-5. **서버 실행**
-   ```bash
-   python main.py
-   ```
-   브라우저에서 `http://localhost:8000` 접속
+브라우저에서 `http://localhost:8000` 접속
 
----
+### 3. Docker 실행
 
-## 📜 라이선스
-This project is licensed under the MIT License.
+```bash
+docker-compose up --build -d
+```
+
+
